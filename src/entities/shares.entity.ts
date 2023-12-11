@@ -1,7 +1,9 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { type } from "os";
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { userShare } from "./user_share.entity";
 
 @Entity()
-export class share extends BaseEntity {
+export class shares extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,5 +15,8 @@ export class share extends BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
   updated_at: Date;
+
+  @OneToMany(type => userShare, userShare => userShare.share, { eager: true })
+  userShares: userShare[];
 
 }
