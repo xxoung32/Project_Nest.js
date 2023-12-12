@@ -26,10 +26,10 @@ export class userRequests extends BaseEntity {
   @Column({ type: 'tinyint', width: 1, nullable: false, default: 0 })
   is_completed: number;
 
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
 
 }

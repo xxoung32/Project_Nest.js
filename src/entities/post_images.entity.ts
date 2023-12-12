@@ -11,9 +11,9 @@ export class postImages {
   @Column({ type: 'varchar', length: 2000 , nullable: false })
   url : string;
 
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
   
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
 }

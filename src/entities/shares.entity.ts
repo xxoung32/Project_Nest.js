@@ -10,13 +10,13 @@ export class shares extends BaseEntity {
   @Column({ type: 'integer', nullable: false })
   host_id: number;
 
-  @CreateDateColumn({ type: 'timestamp', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
 
-  @OneToMany(type => userShare, userShare => userShare.share, { eager: true })
+  @OneToMany(type => userShare, userShare => userShare.share)
   userShares: userShare[];
 
 }

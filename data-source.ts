@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config(); 
 
+console.log(path.join(__dirname, 'src/entities/**/*.entity{.ts,.js}'))
 export const dataSource = new DataSource({
   type: 'mysql',
   host: process.env.TYPEORM_HOST,

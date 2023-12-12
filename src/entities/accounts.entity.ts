@@ -18,10 +18,10 @@ export class accounts extends BaseEntity {
   @Column({ type: 'varchar', length: 20, nullable: false, default: 0, unique: true })
   ci: string
 
-  @CreateDateColumn({ type: 'timestamp', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
 
   @ManyToOne(type => users, user => user.accounts, { eager: true })

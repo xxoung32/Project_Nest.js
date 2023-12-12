@@ -17,13 +17,13 @@ export class userApprovals extends BaseEntity {
   @Column({ type: 'varchar', length: 20, nullable: false })
   approved_by: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', nullable: true })
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', nullable: true })
   approval_date: Date;
 
-  @CreateDateColumn({ type: 'timestamp', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
 
 }

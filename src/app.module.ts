@@ -12,7 +12,7 @@ dotenv.config();
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
-        // retryAttempts: 10,
+        // retryAttempts: 10, ==> 소헌님 질문
         type: 'mysql',
         host: process.env.TYPEORM_HOST,
         username: process.env.TYPEORM_USERNAME,

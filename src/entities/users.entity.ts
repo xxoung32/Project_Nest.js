@@ -35,16 +35,16 @@ export class users extends BaseEntity {
   @Column({ type: 'integer', width: 1 , nullable: false, default: 0 })
   status: number;
 
-  @CreateDateColumn({ type: 'timestamp', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
 
-  @OneToMany(type => accounts, account => account.user, { eager: true })
+  @OneToMany(type => accounts, account => account.user)
   accounts: accounts[];
 
   // One-to-Many relationship with UserShare
-  @OneToMany(type => userShare, userShare => userShare.user, { eager: true })
+  @OneToMany(type => userShare, userShare => userShare.user)
   userShares: userShare[];
 }
