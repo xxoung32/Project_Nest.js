@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { postImages } from "./post_images.entity";
 
 @Entity()
 export class posts {
@@ -19,5 +20,7 @@ export class posts {
 
   @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
-  
+
+  @OneToMany(() => postImages, postImage => postImage.post)
+  post_images: postImages;
 }

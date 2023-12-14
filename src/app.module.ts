@@ -3,6 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
+import { PostsModule } from './posts/posts.module';
+import { PostsController } from './posts/posts.controller';
+import { PostsService } from './posts/posts.service';
 import * as dotenv from 'dotenv'; 
 
 dotenv.config(); 
@@ -27,7 +30,9 @@ dotenv.config();
         timezone: 'local',
       }),
     }),
+    PostsModule,
   ],
   providers: [AppService],
+  controllers: [],
 })
 export class AppModule {}
