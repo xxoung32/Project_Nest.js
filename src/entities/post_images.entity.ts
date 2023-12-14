@@ -21,4 +21,5 @@ export class postImages {
   @ManyToOne(() => posts, post => post.post_images, {eager:true})
   @JoinColumn({ name: 'post_id' })
   post:posts
+    length: number;
 }
