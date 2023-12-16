@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+//posts.controller.ts
+import { BadRequestException, Body, Controller, Get, Param, ParseIntPipe, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { posts } from 'src/entities/posts.entity';
 import { CreatePostDto } from './dto/createPosts.dto';
@@ -12,14 +13,17 @@ export class PostsController {
         return this.postsService.getAllPosts(page, pageSize);
     }
 
-    //@Get(':/id') 작성
+    @Get(':id')
+    getPostById(@Param('id', ParseIntPipe) id: number) {
+        return this.postsService.getPostById(id)
+    }
+
 
     @Post()
     @UsePipes(ValidationPipe)
-    createPost(@Body() CreatePostDto: CreatePostDto): Promise<posts> {
-        return this.postsService.createPost(CreatePostDto)
+    createPost(@Body() createPostDto: CreatePostDto): Promise<posts> {
+        return this.postsService.createPost(createPostDto);
     }
-
 
 }
 
