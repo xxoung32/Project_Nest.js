@@ -1,15 +1,18 @@
 //posts.repository.ts
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { posts } from "src/entities/posts.entity";
 import { DataSource, Repository } from "typeorm";
-import { CreatePostDto } from "./dto/createPosts.dto";
+import { createPostDto } from "./dto/createPosts.dto";
+import { UpdatePostDto } from "./dto/updatePosts.dto";
 
 @Injectable()
 export class PostRepository extends Repository<posts> {
+    postsRepository: any;
     constructor(dataSource: DataSource){
         super(posts, dataSource.createEntityManager());
     }
 
+    //모든 게시물 불러오기
     async getAllPosts(page: number = 1, pageSize: number = 10): Promise<any> {
         const skip = (page - 1) * pageSize;
         const [posts, count] = await this.createQueryBuilder('posts') 
@@ -29,6 +32,7 @@ export class PostRepository extends Repository<posts> {
         return { result, count, totalPages: Math.ceil(count / pageSize) };
     }
 
+    //특정 게시물 불러오기
     async getPostById(id: number): Promise<any>{
         const post = await this.createQueryBuilder('posts')
           .select([
@@ -49,7 +53,8 @@ export class PostRepository extends Repository<posts> {
         
     }
     
-    async createPosts(createPostDto: CreatePostDto): Promise<posts> {
+    //게시물 생성하기
+    async createPosts(createPostDto: createPostDto): Promise<posts> {
         const { userId, title, content } = createPostDto;
         const createPost = this.create({
             user_id: userId,
@@ -60,4 +65,11 @@ export class PostRepository extends Repository<posts> {
         await this.save(createPost)
         return createPost;
     }
+
+    //게시물 수정하기
+
+
+
 }
+
+

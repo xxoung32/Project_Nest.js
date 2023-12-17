@@ -1,6 +1,6 @@
 import { IsInt, IsNotEmpty, IsString } from "class-validator";
 
-export class CreatePostDto {
+export class createPostDto {
     @IsNotEmpty()
     @IsInt()
     userId: number;

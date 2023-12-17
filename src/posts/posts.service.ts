@@ -3,8 +3,9 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from './posts.repository';
 import { posts } from 'src/entities/posts.entity';
-import { CreatePostDto } from './dto/createPosts.dto';
-
+import { createPostDto } from './dto/createPosts.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import { UpdatePostDto } from './dto/updatePosts.dto';
 
 
 @Injectable()
@@ -26,8 +27,27 @@ export class PostsService {
         } return postById;
     }
 
-    async createPost(createPostDto: CreatePostDto): Promise<posts> {
+    async createPost(createPostDto: createPostDto): Promise<posts> {
         return this.PostRepository.createPosts(createPostDto);
+    }
+
+   
+    // async updatePost(id: number, updatePostDto: UpdatePostDto): Promise<posts>{
+    //     const postById = await this.PostRepository.getPostById(id);
+
+    //     if(!postById){
+    //         throw new NotFoundException(`post not found with the id ${id}`)
+    //     }
+
+    //     return this.PostRepository.updatePost(updatePostDto)
+    // }
+    
+    async deletePost(id: number): Promise<void> {
+        const result = await this.PostRepository.delete(id);
+
+        if(result.affected === 0) {
+            throw new NotFoundException(`Can't find Board with id ${id}`)
+        }
     }
 
 

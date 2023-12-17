@@ -1,8 +1,9 @@
 //posts.controller.ts
-import { BadRequestException, Body, Controller, Get, Param, ParseIntPipe, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { posts } from 'src/entities/posts.entity';
-import { CreatePostDto } from './dto/createPosts.dto';
+import { createPostDto } from './dto/createPosts.dto';
+import { UpdatePostDto } from './dto/updatePosts.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -21,9 +22,26 @@ export class PostsController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    createPost(@Body() createPostDto: CreatePostDto): Promise<posts> {
+    createPost(@Body() createPostDto: createPostDto): Promise<posts> {
         return this.postsService.createPost(createPostDto);
     }
+
+    
+    // @Delete(':id')
+    // deletePost(@Param('id', ParseIntPipe) id): Promise<void>{
+    //     return this.postsService.deletePost(id)
+    // }
+
+    @Delete(':id')
+    async deletePost(@Param('id', ParseIntPipe) id): Promise<{ message: string }> {
+      await this.postsService.deletePost(id);
+      // 직접 응답 객체를 반환하고 Express의 Response 메서드 활용
+      return { message: 'DELETE_POST_SUCCESS' };
+    }
+    
+
+
+
 
 }
 
