@@ -31,16 +31,18 @@ export class PostsService {
         return this.PostRepository.createPosts(createPostDto);
     }
 
-   
-    // async updatePost(id: number, updatePostDto: UpdatePostDto): Promise<posts>{
-    //     const postById = await this.PostRepository.getPostById(id);
+    async updatePost(id: number, updatePostDto: UpdatePostDto): Promise<posts> {
+        const existingPost = await this.PostRepository.findOne({ where: {id}});
+        if(!existingPost){
+            throw new NotFoundException(`Post not found with the id ${id}`);
+        }
+        existingPost.title = updatePostDto.title;
+        existingPost.content = updatePostDto.content;
+        await this.PostRepository.save(existingPost);
+        return existingPost
+       
+    }
 
-    //     if(!postById){
-    //         throw new NotFoundException(`post not found with the id ${id}`)
-    //     }
-
-    //     return this.PostRepository.updatePost(updatePostDto)
-    // }
     
     async deletePost(id: number): Promise<void> {
         const result = await this.PostRepository.delete(id);

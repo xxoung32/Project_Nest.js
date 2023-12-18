@@ -1,15 +1,18 @@
 //updatedto.ts
 import { PartialType } from "@nestjs/mapped-types";
-import { createPostDto } from "./createPosts.dto";
-import { IsOptional, IsString } from "class-validator";
+import { IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export class UpdatePostDto extends PartialType(createPostDto) {
+export class UpdatePostDto {
+    
     @IsString()
     @IsOptional() 
-    title?: string; // title 속성만 수정 가능하도록 추가
-  
+    title?: string; // title 속성만 수정 가능하도록 변경, 기본값은 undefined
+
     @IsString()
     @IsOptional() 
-    content?: string; // content 속성만 수정 가능하도록 추가
+    content?: string; // content 속성만 수정 가능하도록 변경, 기본값은 undefined
 
-};
+    constructor(partial: Partial<UpdatePostDto>) {
+        Object.assign(this, partial);
+    }
+}

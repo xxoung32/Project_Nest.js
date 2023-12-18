@@ -1,5 +1,5 @@
 //posts.controller.ts
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { posts } from 'src/entities/posts.entity';
 import { createPostDto } from './dto/createPosts.dto';
@@ -26,12 +26,13 @@ export class PostsController {
         return this.postsService.createPost(createPostDto);
     }
 
+    @Patch(':id')
+    @UsePipes(ValidationPipe)
+    updatePost(@Param('id', ParseIntPipe) id: number, @Body() updatePostDto: UpdatePostDto): Promise<posts> {
+        return this.postsService.updatePost(id, updatePostDto)
+    }
     
-    // @Delete(':id')
-    // deletePost(@Param('id', ParseIntPipe) id): Promise<void>{
-    //     return this.postsService.deletePost(id)
-    // }
-
+    
     @Delete(':id')
     async deletePost(@Param('id', ParseIntPipe) id): Promise<{ message: string }> {
       await this.postsService.deletePost(id);
