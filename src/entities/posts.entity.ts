@@ -2,6 +2,14 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 @Entity()
 export class posts {
+  static created_at: any;
+    static content: any;
+    static title: any;
+    static user_id: any;
+    static id: any;
+  static map(arg0: (post: any) => { Posts_id: any; Posts_user_id: any; Posts_title: any; Posts_content: any; Posts_created_at: any; Post_images_post_id: any; Posts_images_url: any; }) {
+      throw new Error("Method not implemented.");
+  }
   @PrimaryGeneratedColumn()
   id: number
 
@@ -19,5 +27,5 @@ export class posts {
 
   @UpdateDateColumn({ type: 'datetime'})
   updated_at: Date;
-  
+
 }
