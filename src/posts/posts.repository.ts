@@ -3,10 +3,10 @@ import { Injectable } from "@nestjs/common";
 import { posts } from "src/entities/posts.entity";
 import { DataSource, Repository } from "typeorm";
 import { createPostDto } from "./dto/createPosts.dto";
-import { UpdatePostDto } from "./dto/updatePosts.dto";
 
 @Injectable()
 export class PostRepository extends Repository<posts> {
+   
     postsRepository: any;
     constructor(dataSource: DataSource){
         super(posts, dataSource.createEntityManager());
@@ -65,9 +65,6 @@ export class PostRepository extends Repository<posts> {
         await this.save(createPost)
         return createPost;
     }
-
-    //게시물 수정하기
-
 
 
 }

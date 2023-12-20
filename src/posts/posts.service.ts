@@ -1,10 +1,9 @@
 //post.service.ts
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from './posts.repository';
 import { posts } from 'src/entities/posts.entity';
 import { createPostDto } from './dto/createPosts.dto';
-import { PartialType } from '@nestjs/mapped-types';
 import { UpdatePostDto } from './dto/updatePosts.dto';
 
 
