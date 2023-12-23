@@ -13,10 +13,6 @@ import { PostRepository } from 'src/posts/posts.repository';
     TypeOrmModule.forFeature([posts]),
   ],
   controllers: [CommentsController],
-  providers: [
-    CommentsService,
-    CommentRepository,
-    PostRepository
-  ]
+  providers: [CommentsService, CommentRepository, PostRepository],
 })
 export class CommentsModule {}

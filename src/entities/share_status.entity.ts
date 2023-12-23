@@ -1,4 +1,11 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class shareStatus extends BaseEntity {
@@ -11,7 +18,6 @@ export class shareStatus extends BaseEntity {
   @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
-
 }

@@ -4,14 +4,10 @@ import * as path from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
-// import { PostsController } from './posts/posts.controller';
-// import { PostsService } from './posts/posts.service';
 import { CommentsModule } from './comments/comments.module';
-// import { CommentsService } from './comments/comments.service';
-// import { CommentsController } from './comments/comments.controller';
-import * as dotenv from 'dotenv'; 
+import * as dotenv from 'dotenv';
 
-dotenv.config(); 
+dotenv.config();
 
 @Module({
   imports: [
@@ -25,13 +21,12 @@ dotenv.config();
         password: process.env.TYPEORM_PASSWORD,
         database: process.env.TYPEORM_DATABASE,
         port: Number(process.env.TYPEORM_PORT),
-        entities: [
-          path.join(__dirname, '/entities/**/*.entity.{js, ts}'),
-        ],
+        entities: [path.join(__dirname, '/entities/**/*.entity.{js, ts}')],
         migrations: [path.join(__dirname, '/migrations/**/*.js')],
         synchronize: true,
         logging: true,
         timezone: 'local',
+        softDelete: true,
       }),
     }),
     PostsModule,

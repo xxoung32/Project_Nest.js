@@ -1,28 +1,29 @@
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export class CreateCommentsDto {  // 클래스명은 일반적으로 PascalCase로 작성
-    @IsNotEmpty()
-    @IsInt()
-    userId: number;
+export class CreateCommentsDto {
+  @IsNotEmpty()
+  @IsNumber()
+  userId?: number;
 
-    @IsNotEmpty()
-    @IsInt()
-    postId: number;
+  @IsNotEmpty()
+  @IsNumber()
+  postId?: number;
 
-    @IsOptional()
-    @IsInt()
-    parentCommentId?: number;
+  @IsNotEmpty()
+  @IsString()
+  content: string;
 
-    @IsNotEmpty()
-    @IsString()
-    content: string;
+  @IsBoolean()
+  @IsOptional()
+  is_deleted?: boolean;
 
-    @IsOptional()
-    @IsNumber()
-    orderNumber?: number
-    
-    
-    // static postId: any;
-
-
+  @IsNumber()
+  @IsOptional()
+  parent?: number;
 }

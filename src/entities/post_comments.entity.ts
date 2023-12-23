@@ -1,9 +1,20 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { posts } from './posts.entity';
 
 @Entity()
 export class postComments {
   @PrimaryGeneratedColumn()
-  id: number 
+  id: number;
 
   @Column({ type: 'integer', nullable: false })
   user_id: number;
@@ -11,33 +22,26 @@ export class postComments {
   @Column({ type: 'integer', nullable: false })
   post_id: number;
 
-  // @Column({ type: 'integer', nullable: true })
-  // parent_comment_id : string;
-  @ManyToOne(() => postComments, {nullable: true})
-  @JoinColumn({ name: 'parent_comment_id' })
-  parentComment: postComments; //부모 댓글 ID
-  
-  @Column({ type: 'varchar', length: 500 , nullable: false })
+  @Column({ type: 'varchar', length: 500, nullable: false })
   content: string; //댓글 내용
 
-  @Column({ default: false })
-  isCommentForComment: boolean; // 대댓글 여부
+  @ManyToOne(() => posts, (post) => post.comments, { onDelete: 'CASCADE' }) // 추가
+  @JoinColumn({ name: 'post_id' }) // 추가
+  post: posts; // 추가
 
-  @Column({ type: 'timestamp', nullable: true })
-  deletedTime: Date; //삭제시간
+  @ManyToOne(() => postComments, (comment) => comment.children)
+  @JoinColumn({ name: 'parent_id' })
+  parent: postComments;
 
-  @Column({ default: false })
-  deletedTrue: boolean; //삭제 여부
+  @OneToMany(() => postComments, (comment) => comment.parent)
+  children: postComments[];
 
-  @Column({ default: 0 })
-  depth: number; //댓글의 깊이
-
-  @Column({ default: 0 })
-  orderNumber: number; //댓글의 순서
-
-  @CreateDateColumn({ type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
-  
-  @UpdateDateColumn({ type: 'datetime'})
+
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
+
+  @DeleteDateColumn({ nullable: true })
+  deleted_at: Date | null;
 }
