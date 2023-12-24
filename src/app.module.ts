@@ -22,7 +22,7 @@ dotenv.config();
         database: process.env.TYPEORM_DATABASE,
         port: Number(process.env.TYPEORM_PORT),
         entities: [path.join(__dirname, '/entities/**/*.entity.{js, ts}')],
-        synchronize: false,
+        synchronize: true,
         logging: true,
         timezone: 'local',
       }),
