@@ -10,6 +10,7 @@ import {
   Post,
   UsePipes,
   ValidationPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentsDto } from './dto/createComments.dto';
@@ -19,11 +20,15 @@ import { updateCommentsDto } from './dto/updateComments.dto';
 @Controller('comments')
 export class CommentsController {
   constructor(private commentsService: CommentsService) {}
-  @Post()
+  @Post(':postId')
   @UsePipes(ValidationPipe)
   async createComment(
     @Body() commentInfo: CreateCommentsDto,
+    @Param('postId') postId: number,
   ): Promise<postComments> {
+    if (postId !== commentInfo.postId) {
+      throw new BadRequestException('postId in URL and Body do not match');
+    }
     return this.commentsService.createComment(commentInfo);
   }
 
