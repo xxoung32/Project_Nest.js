@@ -1,7 +1,15 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { accounts } from "./accounts.entity";
-import { userShare } from "./user_share.entity";
-import { type } from "os";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { accounts } from './accounts.entity';
+import { userShare } from './user_share.entity';
+import { type } from 'os';
 
 @Entity()
 export class users extends BaseEntity {
@@ -32,19 +40,19 @@ export class users extends BaseEntity {
   @Column({ type: 'tinyint', width: 1, nullable: false })
   subscription_state: number;
 
-  @Column({ type: 'integer', width: 1 , nullable: false, default: 0 })
+  @Column({ type: 'integer', width: 1, nullable: false, default: 0 })
   status: number;
 
-  @CreateDateColumn({ type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
 
-  @OneToMany(type => accounts, account => account.user)
+  @OneToMany((type) => accounts, (account) => account.user)
   accounts: accounts[];
 
   // One-to-Many relationship with UserShare
-  @OneToMany(type => userShare, userShare => userShare.user)
+  @OneToMany((type) => userShare, (userShare) => userShare.user)
   userShares: userShare[];
 }

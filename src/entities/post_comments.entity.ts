@@ -1,9 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class postComments {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column({ type: 'integer', nullable: false })
   user_id: number;
@@ -12,14 +18,14 @@ export class postComments {
   post_id: number;
 
   @Column({ type: 'integer', nullable: true })
-  parent_comment_id : string;
+  parent_comment_id: string;
 
-  @Column({ type: 'varchar', length: 500 , nullable: false })
+  @Column({ type: 'varchar', length: 500, nullable: false })
   content: string;
 
-  @CreateDateColumn({ type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
-  
-  @UpdateDateColumn({ type: 'datetime'})
+
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
 }

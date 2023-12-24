@@ -1,9 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class subscription_orders {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column({ type: 'integer', nullable: false })
   user_id: number;
@@ -11,15 +17,15 @@ export class subscription_orders {
   @Column({ type: 'integer', nullable: false })
   amount: number;
 
-  @Column({ type: 'varchar', length: 10 , nullable: false })
+  @Column({ type: 'varchar', length: 10, nullable: false })
   provider: string;
 
   @Column({ type: 'boolean', default: true, nullable: false })
   status: boolean;
 
-  @CreateDateColumn({ type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
-  
-  @UpdateDateColumn({ type: 'datetime'})
+
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
 }
