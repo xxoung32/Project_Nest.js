@@ -25,4 +25,11 @@ export class PostLikesService {
     }
     return this.postLikesRepository.createPostLike(createPostLikeDto);
   }
+
+  async deletePostLike(id: number): Promise<void> {
+    const result = await this.postLikesRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Can't find Likes with id ${id}`);
+    }
+  }
 }

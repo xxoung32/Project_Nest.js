@@ -6,7 +6,8 @@ import {
   Body,
   Param,
   ParseIntPipe,
-  BadRequestException
+  BadRequestException,
+  Delete,
 } from '@nestjs/common';
 import { PostLikesService } from './post-likes.service';
 import { postLikes } from 'src/entities/post_likes.entity';
@@ -26,5 +27,13 @@ export class PostLikesController {
       throw new BadRequestException('postId in URL and Body do not match');
     }
     return this.postLikesService.createPostLike(createPostLikeDto);
+  }
+
+  @Delete(':id')
+  async deletePostLike(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ message: string }> {
+    await this.postLikesService.deletePostLike(id);
+    return { message: 'DELETE_LIKE_SUCCESS' };
   }
 }

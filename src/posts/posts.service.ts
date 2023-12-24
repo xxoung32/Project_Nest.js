@@ -48,7 +48,7 @@ export class PostsService {
     const result = await this.PostRepository.delete(id);
 
     if (result.affected === 0) {
-      throw new NotFoundException(`Can't find Board with id ${id}`);
+      throw new NotFoundException(`Can't find Post with id ${id}`);
     }
   }
 }
