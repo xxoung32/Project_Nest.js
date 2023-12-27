@@ -1,5 +1,14 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { users } from "./users.entity";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { users } from './users.entity';
 
 @Entity()
 export class accounts extends BaseEntity {
@@ -15,15 +24,21 @@ export class accounts extends BaseEntity {
   @Column({ type: 'varchar', length: 20, nullable: false })
   provider: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false, default: 0, unique: true })
-  ci: string
+  @Column({
+    type: 'varchar',
+    length: 20,
+    nullable: false,
+    default: 0,
+    unique: true,
+  })
+  ci: string;
 
-  @CreateDateColumn({ type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
 
-  @ManyToOne(type => users, user => user.accounts, { eager: true })
+  @ManyToOne((type) => users, (user) => user.accounts, { eager: true })
   user: users;
 }

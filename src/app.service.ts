@@ -12,5 +12,4 @@ export class AppService {
   getDatabaseUrl(): string {
     return this.configService.get<string>('DATABASE_URL');
   }
-
 }

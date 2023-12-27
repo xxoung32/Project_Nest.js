@@ -1,9 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class postLikes {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column({ type: 'integer', nullable: false })
   user_id: number;
@@ -11,9 +17,9 @@ export class postLikes {
   @Column({ type: 'integer', nullable: false })
   post_id: number;
 
-  @CreateDateColumn({ type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
-  
-  @UpdateDateColumn({ type: 'datetime'})
+
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
 }
