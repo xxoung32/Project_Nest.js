@@ -7,9 +7,6 @@ import { CreateCommentsDto } from './dto/createComments.dto';
 
 @Injectable()
 export class CommentRepository extends Repository<postComments> {
-  findTopLevelComments(postId: number) {
-    throw new Error('Method not implemented.');
-  }
   constructor(dataSource: DataSource) {
     super(postComments, dataSource.createEntityManager());
   }
@@ -30,9 +27,6 @@ export class CommentRepository extends Repository<postComments> {
       where: { post_id: postId, deleted_at: null },
       relations: ['post', 'children', 'parent'],
     });
-
-    // 디버그 메시지 출력
-    console.log('commentsList:', commentsList);
 
     const formattedComments = commentsList
       .filter((comment) => !comment.parent)
@@ -69,8 +63,6 @@ export class CommentRepository extends Repository<postComments> {
         replies: this.formatReplies(reply.children),
       });
     });
-
-    console.log('formattedReplies:', formattedReplies);
     return formattedReplies;
   }
 }
