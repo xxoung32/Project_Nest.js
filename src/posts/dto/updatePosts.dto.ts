@@ -1,6 +1,5 @@
 //updatedto.ts
-import { PartialType } from '@nestjs/mapped-types';
-import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UpdatePostDto {
   @IsString()

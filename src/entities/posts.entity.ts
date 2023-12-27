@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { postComments } from './post_comments.entity';
 
 @Entity()
 export class posts {
@@ -38,7 +40,7 @@ export class posts {
   @Column({ type: 'text' })
   content: string;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime'})
   created_at: Date;
 
   @UpdateDateColumn({ type: 'datetime' })

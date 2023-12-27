@@ -4,9 +4,12 @@ import * as path from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
+import { CommentsModule } from './comments/comments.module';
+import * as dotenv from 'dotenv';
 import { PostLikesModule } from './post-likes/post-likes.module';
 import * as dotenv from 'dotenv';
 
+dotenv.config();
 dotenv.config();
 
 @Module({
@@ -22,12 +25,17 @@ dotenv.config();
         database: process.env.TYPEORM_DATABASE,
         port: Number(process.env.TYPEORM_PORT),
         entities: [path.join(__dirname, '/entities/**/*.entity.{js, ts}')],
+        migrations: [path.join(__dirname, '/migrations/**/*.js')],
+        synchronize: true,
+        entities: [path.join(__dirname, '/entities/**/*.entity.{js, ts}')],
         synchronize: true,
         logging: true,
         timezone: 'local',
+        softDelete: true,
       }),
     }),
     PostsModule,
+    CommentsModule,
     PostLikesModule,
   ],
   providers: [AppService],
