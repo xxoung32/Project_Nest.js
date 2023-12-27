@@ -22,11 +22,19 @@ export class postComments {
   @Column({ type: 'integer', nullable: false })
   post_id: number;
 
-  @Column({ type: 'integer', nullable: true })
-  parent_comment_id : string;
+  @Column({ type: 'varchar', length: 500, nullable: false })
+  content: string; //댓글 내용
 
-  @Column({ type: 'varchar', length: 500 , nullable: false })
-  content: string;
+  @ManyToOne(() => posts, (post) => post.comments, { onDelete: 'CASCADE' }) // 추가
+  @JoinColumn({ name: 'post_id' }) // 추가
+  post: posts; // 추가
+
+  @ManyToOne(() => postComments, (comment) => comment.children)
+  @JoinColumn({ name: 'parent_id' })
+  parent: postComments;
+
+  @OneToMany(() => postComments, (comment) => comment.parent)
+  children: postComments[];
 
   @CreateDateColumn({ type: 'datetime' })
   created_at: Date;

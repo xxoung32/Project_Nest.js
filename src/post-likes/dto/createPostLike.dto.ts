@@ -1,11 +1,11 @@
-import { IsInt, IsNotEmpty } from "class-validator";
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class createPostLikeDto {
-    @IsNotEmpty()
-    @IsInt()
-    userId: number;
+  @IsNotEmpty()
+  @IsInt()
+  userId: number;
 
-    @IsNotEmpty()
-    @IsInt()
-    postId: number;
+  @IsNotEmpty()
+  @IsInt()
+  postId: number;
 }

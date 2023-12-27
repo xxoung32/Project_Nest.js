@@ -8,11 +8,11 @@ import { postLikesRepository } from './post-likes.repository';
 import { PostRepository } from 'src/posts/posts.repository';
 
 @Module({
-  imports:[
+  imports: [
     TypeOrmModule.forFeature([postLikes]),
-    TypeOrmModule.forFeature([posts])
+    TypeOrmModule.forFeature([posts]),
   ],
   controllers: [PostLikesController],
-  providers: [PostLikesService, postLikesRepository, PostRepository]
+  providers: [PostLikesService, postLikesRepository, PostRepository],
 })
 export class PostLikesModule {}

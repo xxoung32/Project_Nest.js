@@ -1,6 +1,5 @@
 //post.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostRepository } from './posts.repository';
 import { posts } from 'src/entities/posts.entity';
@@ -14,18 +13,6 @@ export class PostsService {
     @InjectRepository(PostRepository)
     private PostRepository: PostRepository,
   ) {}
-  findPosts: any;
-  constructor(
-    @InjectRepository(PostRepository)
-    private PostRepository: PostRepository,
-  ) {}
-
-  async getAllPosts(
-    page: number = 1,
-    pageSize: number = 10,
-  ): Promise<{ result: posts[]; count: number; totalPages: number }> {
-    return this.PostRepository.getAllPosts(page, pageSize);
-  }
   async getAllPosts(
     page: number = 1,
     pageSize: number = 10,
@@ -44,23 +31,6 @@ export class PostsService {
   async createPost(createPostDto: createPostDto): Promise<posts> {
     return this.PostRepository.createPosts(createPostDto);
   }
-  async createPost(createPostDto: createPostDto): Promise<posts> {
-    return this.PostRepository.createPosts(createPostDto);
-  }
-
-  async updatePost(id: number, updatePostDto: UpdatePostDto): Promise<posts> {
-    const existingPost = await this.PostRepository.findOne({ where: { id } });
-    if (!existingPost) {
-      throw new NotFoundException(`Post not found with the id ${id}`);
-    }
-    existingPost.title = updatePostDto.title;
-    existingPost.content = updatePostDto.content;
-    await this.PostRepository.save(existingPost);
-    return existingPost;
-  }
-
-  async deletePost(id: number): Promise<void> {
-    const result = await this.PostRepository.delete(id);
   async updatePost(id: number, updatePostDto: UpdatePostDto): Promise<posts> {
     const existingPost = await this.PostRepository.findOne({ where: { id } });
     if (!existingPost) {

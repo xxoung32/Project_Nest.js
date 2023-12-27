@@ -40,7 +40,10 @@ export class posts {
   @Column({ type: 'text' })
   content: string;
 
-  @CreateDateColumn({ type: 'datetime'})
+  @OneToMany(() => postComments, (comment) => comment.post)
+  comments: postComments[];
+
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
 
   @UpdateDateColumn({ type: 'datetime' })
