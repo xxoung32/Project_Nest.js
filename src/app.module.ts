@@ -5,8 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
+import { PostLikesModule } from './post-likes/post-likes.module';
 import * as dotenv from 'dotenv';
 
+dotenv.config();
 dotenv.config();
 
 @Module({
@@ -31,6 +33,7 @@ dotenv.config();
     }),
     PostsModule,
     CommentsModule,
+    PostLikesModule,
   ],
   providers: [AppService],
   controllers: [],

@@ -13,7 +13,6 @@ export class PostsService {
     @InjectRepository(PostRepository)
     private PostRepository: PostRepository,
   ) {}
-
   async getAllPosts(
     page: number = 1,
     pageSize: number = 10,
@@ -32,7 +31,6 @@ export class PostsService {
   async createPost(createPostDto: createPostDto): Promise<posts> {
     return this.PostRepository.createPosts(createPostDto);
   }
-
   async updatePost(id: number, updatePostDto: UpdatePostDto): Promise<posts> {
     const existingPost = await this.PostRepository.findOne({ where: { id } });
     if (!existingPost) {
@@ -48,7 +46,7 @@ export class PostsService {
     const result = await this.PostRepository.delete(id);
 
     if (result.affected === 0) {
-      throw new NotFoundException(`Can't find Board with id ${id}`);
+      throw new NotFoundException(`Can't find Post with id ${id}`);
     }
   }
 }
